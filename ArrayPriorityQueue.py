@@ -1,13 +1,11 @@
 class ArrayPriorityQueue:
 
-    def __init__(self):
-        self.queue = []
+    def __init__(self, nodes):
+        self.queue = [ -1 for i in range(nodes) ]
+        self.length = 0
 
-    def decrease_key(self, distance, node):
-        if node.node_id > len(self.queue):
-            self.insert(distance, node)
-        else:
-            self.queue[node.node_id] = distance
+    def decrease_key(self, nodeIndex, distance):
+        self.insert(nodeIndex, distance)
 
     def delete_min(self):
         lowest = None
@@ -19,12 +17,12 @@ class ArrayPriorityQueue:
             self.length -= 1
         return lowest
 
-    def insert(self, distance, node):
-        if node.node_id > len(self.queue):
-            self.queue.extend([ -1 for i in range(node.node_id - len(self.queue))])
+    def insert(self, nodeIndex, distance):
+        if nodeIndex > len(self.queue):
+            self.queue.extend([ -1 for i in range(nodeIndex - len(self.queue))])
             self.queue.append(distance)
         else:
-            self.queue[node.node_id] = distance
+            self.queue[nodeIndex] = distance
 
     def getLength(self):
         return self.length

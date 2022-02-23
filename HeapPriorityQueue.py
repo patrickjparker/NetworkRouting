@@ -25,6 +25,9 @@ class HeapPriorityQueue:
         self.bubbleDown(0)
         return index
 
+    def insert(self, nodeID, value):
+        self.decrease_key(nodeID, value)
+
     def getLength(self):
         return len(self.queue)
 

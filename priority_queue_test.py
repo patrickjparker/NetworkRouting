@@ -39,6 +39,5 @@ def test_change_existing_value(queue):
 
 def test_insert(queue):
     queue = set_up_queue(queue, 8)
-    val = (3, "hello")
-    queue.insert(4, val)
-    assert(queue.delete_min() == val)
+    queue.insert(3, 74)
+    assert(queue.delete_min() == 3)
