@@ -74,7 +74,7 @@ def main():
         arrayTime = "{:.6f}".format(getAverageComputTime(size, False))
         print("{0}: (array) {1}  -  (heap) {2}".format(size, arrayTime, heapTime))
     heapTime = "{:.6f}".format(getAverageComputTime(LAST_SIZE, True))
-    print("{0}: (heap) {2}".format(LAST_SIZE, heapTime))
+    print("{0}: (heap) {1}".format(LAST_SIZE, heapTime))
 
 
 if __name__ == '__main__':
