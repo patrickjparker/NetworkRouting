@@ -21,7 +21,10 @@ class ArrayPriorityQueue:
         if nodeIndex > len(self.queue):
             self.queue.extend([ -1 for i in range(nodeIndex - len(self.queue))])
             self.queue.append(distance)
+            self.length += 1
         else:
+            if self.queue[nodeIndex] == -1:
+                self.length += 1
             self.queue[nodeIndex] = distance
 
     def getLength(self):
