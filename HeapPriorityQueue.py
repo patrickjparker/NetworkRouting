@@ -14,6 +14,11 @@ class HeapPriorityQueue:
             self.queue[index].distance = value
         self.bubbleUp(index) # Moves changed/new value to correct place
 
+    # insert and decrease_key word essentially the same way
+    # decrease_key can handle keys that haven't been initialized
+    # so we can just all decrease_key
+    def insert(self, nodeID, value):
+        self.decrease_key(nodeID, value)
 
     def delete_min(self):
         if self.getLength() < 1: return None # Nothing to return
@@ -27,12 +32,6 @@ class HeapPriorityQueue:
         self.map[index] = -1
         self.bubbleDown(0) # reorganize queue
         return index
-
-    # insert and decrease_key word essentially the same way
-    # decrease_key can handle keys that haven't been initialized
-    # so we can just all decrease_key
-    def insert(self, nodeID, value):
-        self.decrease_key(nodeID, value)
 
     def getLength(self):
         return len(self.queue)
@@ -65,7 +64,8 @@ class HeapPriorityQueue:
         # Swap values in queue
         queue[indexA], queue[indexB] = queue[indexB], queue[indexA]
         # Swap values in map
-        self.map[queue[indexA].index], self.map[queue[indexB].index] = self.map[queue[indexB].index], self.map[queue[indexA].index]
+        self.map[queue[indexA].index], self.map[queue[indexB].index] = \
+            self.map[queue[indexB].index], self.map[queue[indexA].index]
 
     def __str__(self) -> str:
         string = ""

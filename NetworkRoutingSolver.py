@@ -5,6 +5,7 @@ from CS312Graph import *
 from ArrayPriorityQueue import *
 from HeapPriorityQueue import *
 import time
+import math
 
 
 class NetworkRoutingSolver:
@@ -17,10 +18,8 @@ class NetworkRoutingSolver:
 
     def getShortestPath( self, destIndex ):
         self.dest = destIndex
-        # TODO: RETURN THE SHORTEST PATH FOR destIndex
-        #       INSTEAD OF THE DUMMY SET OF EDGES BELOW
-        #       IT'S JUST AN EXAMPLE OF THE FORMAT YOU'LL 
-        #       NEED TO USE
+        if self.prev[destIndex] == None:
+            return {'cost': math.inf, 'path': []}
         path_edges = []
         total_length = 0
         node = self.network.nodes[destIndex]
@@ -35,17 +34,16 @@ class NetworkRoutingSolver:
     def computeShortestPaths( self, srcIndex, use_heap=False ):
         self.source = srcIndex
         t1 = time.time()
-        # TODO: RUN DIJKSTRA'S TO DETERMINE SHORTEST PATHS.
-        #       ALSO, STORE THE RESULTS FOR THE SUBSEQUENT
-        #       CALL TO getShortestPath(dest_index)
         nodes = self.network.getNodes()
         # Create array setting everything equal to the unvisited values
         self.dist = [ -1 for i in nodes ]
         self.prev = [ None for i in nodes ]
+        # Initialize correct priorityQueue
         if use_heap:
             pq = HeapPriorityQueue(len(nodes))
         else:
             pq = ArrayPriorityQueue(len(nodes))
+        # Insert starting node
         self.dist[srcIndex] = 0
         pq.decrease_key(srcIndex, 0)
         while pq.getLength() > 0:
